@@ -14,6 +14,8 @@ BOT_NAME = 'viaspider'
 SPIDER_MODULES = ['viaspider.spiders']
 NEWSPIDER_MODULE = 'viaspider.spiders'
 
+FEED_URI = './logs/%(name)s/%(time)s.json'
+FEED_FORMAT = 'json'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'viaspider (+http://www.yourdomain.com)'
