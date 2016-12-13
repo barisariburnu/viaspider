@@ -45,15 +45,15 @@ class CokOkuyanCokGezenSpider(CrawlSpider):
         return item
         
     def get_title(self, response):
-        title = response.xpath('//head/title/text()').extract()[0]
-        return title[:-23] if title.encode('utf-8').endswith(' | Çok Okuyan Çok Gezen') else title
+        title = response.xpath('//head/title/text()').extract()[0].encode('utf-8')
+        return title[:-23] if title.endswith(' | Çok Okuyan Çok Gezen') else title
         
     def get_summary(self, response):
         summary = response.xpath('//head/meta[@property="og:description"]/@content').extract()[0]
         return summary[:-SUMMARY_LIMIT] if len(summary) > SUMMARY_LIMIT else summary
         
     def get_categories(self, response):
-        categories = response.xpath('//head/meta[@property="article:section"]/@content').extract()
+        categories = response.xpath('//head/meta[@property="article:section"]/@content').extract()[0]
         return categories
         
     def get_tags(self, response):
@@ -61,9 +61,9 @@ class CokOkuyanCokGezenSpider(CrawlSpider):
         return tags
         
     def get_image(self, response):
-        image = response.xpath('//head/meta[@property="og:image"]/@content').extract()
+        image = response.xpath('//head/meta[@property="og:image"]/@content').extract()[0]
         return image
         
     def get_created(self, response):
-        created = response.xpath('//head/meta[@property="article:published_time"]/@content').extract()
+        created = response.xpath('//head/meta[@property="article:published_time"]/@content').extract()[0]
         return created
