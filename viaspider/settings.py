@@ -17,6 +17,8 @@ NEWSPIDER_MODULE = 'viaspider.spiders'
 FEED_URI = './logs/%(name)s/%(time)s.json'
 FEED_FORMAT = 'json'
 
+SUMMARY_LIMIT = 200
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'viaspider (+http://www.yourdomain.com)'
 

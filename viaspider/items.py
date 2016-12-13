@@ -10,9 +10,11 @@ import scrapy
 
 class ViaspiderItem(scrapy.Item):
     # define the fields for your item here like:
+    url = scrapy.Field()
     title = scrapy.Field()
     summary = scrapy.Field()
     categories = scrapy.Field()
     tags = scrapy.Field()
     image = scrapy.Field()
+    source = scrapy.Field()
     created = scrapy.Field()
