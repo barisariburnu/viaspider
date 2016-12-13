@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from scrapy.exceptions import DropItem
+from scrapy import log
 
 # Define your item pipelines here
 #
@@ -7,5 +9,12 @@
 
 
 class ViaspiderPipeline(object):
+    def __init__(self):
+         self.post_seen = set()
+         
     def process_item(self, item, spider):
-        return item
+        if item['url'] in self.post_seen:
+            raise DropItem("Duplicate item found: %s" % item)
+        else:
+            self.post_seen.add(item['url'])
+            return item  
