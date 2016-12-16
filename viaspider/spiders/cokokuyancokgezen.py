@@ -46,7 +46,7 @@ class CokOkuyanCokGezenSpider(CrawlSpider):
         
     def get_title(self, response):
         title = response.xpath('//head/title/text()').extract()[0].encode('utf-8')
-        return title[:-23] if title.endswith(' | Çok Okuyan Çok Gezen') else title
+        return ("|".join(title.split("|")[:-1])).strip() if title.endswith(' | Çok Okuyan Çok Gezen') else title
         
     def get_summary(self, response):
         summary = response.xpath('//head/meta[@property="og:description"]/@content').extract()[0]

@@ -4,7 +4,6 @@ from scrapy.contrib.linkextractors import LinkExtractor
 from scrapy.http import Request
 from viaspider.items import ViaspiderItem
 from viaspider.settings import SUMMARY_LIMIT
-from w3lib.html import remove_tags
 
 
 class BenimlegezSpider(CrawlSpider):
@@ -46,7 +45,7 @@ class BenimlegezSpider(CrawlSpider):
         
     def get_title(self, response):
         title = response.xpath('//head/title/text()').extract()[0].encode('utf-8')
-        return title[:-13] if title.endswith(' - BenimleGez') else title
+        return ("-".join(title.split("-")[:-1])).strip() if title.endswith(' - BenimleGez') else title
         
     def get_summary(self, response):
         summary = response.xpath('//head/meta[@property="og:description"]/@content').extract()[0]
