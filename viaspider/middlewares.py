@@ -6,9 +6,12 @@
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
+from viaspider.useragents import USER_AGENT_LIST
+import random
 
 
-class ViaspiderSpiderMiddleware(object):
+class ViaspiderSpiderMiddleware(UserAgentMiddleware):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -19,15 +22,20 @@ class ViaspiderSpiderMiddleware(object):
         s = cls()
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
+    
+    def process_request(self, request, spider):
+        user_agent = random.choice(USER_AGENT_LIST)
+        if user_agent:
+            request.headers.setdefault('User-Agent', user_agent)
 
-    def process_spider_input(response, spider):
+    def process_spider_input(self, response, spider):
         # Called for each response that goes through the spider
         # middleware and into the spider.
 
         # Should return None or raise an exception.
         return None
 
-    def process_spider_output(response, result, spider):
+    def process_spider_output(self, response, result, spider):
         # Called with the results returned from the Spider, after
         # it has processed the response.
 
@@ -35,7 +43,7 @@ class ViaspiderSpiderMiddleware(object):
         for i in result:
             yield i
 
-    def process_spider_exception(response, exception, spider):
+    def process_spider_exception(self, response, exception, spider):
         # Called when a spider or process_spider_input() method
         # (from other spider middleware) raises an exception.
 
@@ -43,7 +51,7 @@ class ViaspiderSpiderMiddleware(object):
         # or Item objects.
         pass
 
-    def process_start_requests(start_requests, spider):
+    def process_start_requests(self, start_requests, spider):
         # Called with the start requests of the spider, and works
         # similarly to the process_spider_output() method, except
         # that it doesn’t have a response associated.
