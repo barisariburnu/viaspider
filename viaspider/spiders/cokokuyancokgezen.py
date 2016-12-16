@@ -39,7 +39,7 @@ class CokOkuyanCokGezenSpider(CrawlSpider):
         item['title'] = self.get_title(response)
         item['summary'] = self.get_summary(response)
         item['categories'] = self.get_categories(response)
-        item['tags'] = self.get_tags(response)
+        item['tags'] = self.get_tags(response, item['categories'])
         item['image'] = self.get_image(response)
         item['created'] = self.get_created(response)
         return item
@@ -53,12 +53,12 @@ class CokOkuyanCokGezenSpider(CrawlSpider):
         return summary[:-SUMMARY_LIMIT] if len(summary) > SUMMARY_LIMIT else summary
         
     def get_categories(self, response):
-        categories = response.xpath('//head/meta[@property="article:section"]/@content').extract()[0]
+        categories = response.xpath('//head/meta[@property="article:section"]/@content').extract()
         return categories
         
-    def get_tags(self, response):
+    def get_tags(self, response, categories):
         tags = response.xpath('//head/meta[@property="article:tag"]/@content').extract()
-        return tags
+        return tags if len(tags) > 0 else categories
         
     def get_image(self, response):
         image = response.xpath('//head/meta[@property="og:image"]/@content').extract()[0]
