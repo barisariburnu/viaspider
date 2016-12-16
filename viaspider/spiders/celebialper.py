@@ -15,8 +15,8 @@ class CelebiAlperSpider(CrawlSpider):
     rules = [
         Rule(
             LinkExtractor(allow = [
-                '/kategori/\w*', 
-                '/kategori/\w*/page/\d*',
+                '/category/\w*', 
+                '/category/\w*/page/\d*',
                 '/cesitli/.*', 
                 '/yediklerim/.*',
             ]),
