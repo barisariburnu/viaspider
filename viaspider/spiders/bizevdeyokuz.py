@@ -20,7 +20,7 @@ class BizEvdeYokuzSpider(CrawlSpider):
                 '/yurt-disi/page/\d*',
                 '/seyahat/$',
                 '/seyahat/page/\d*',
-                '/evde-yoklar/$'
+                '/evde-yoklar/$',
                 '/evde-yoklar/page/\d*'
             ]),
             callback='parse_item',
