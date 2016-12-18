@@ -15,11 +15,16 @@ class DrummerlizardSpider(CrawlSpider):
         Rule(
             LinkExtractor(allow = [
                 '/gezi-rehberi/\w*',
-                '/gezi-rehberi/\w*/page/\d*',
+                '/gezi-rehberi/page/\d*',
                 '/dogada-seyahat/\w*',
                 '/dogada-seyahat/\w*/page/\d*',
                 '/seyahat-ipuclari/\w*',
-                '/seyahat-ipuclari/page/\d*'
+                '/seyahat-ipuclari/page/\d*',
+                '/seyir-defteri/\w*',
+                '/seyir-defteri/page/\d*'
+            ], deny = [
+                '/guncel/.*',
+                '/guncel/page/\d*'
             ]),
             callback='parse_item',
             follow=True
