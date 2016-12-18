@@ -14,16 +14,16 @@ class DrummerlizardSpider(CrawlSpider):
     rules = [
         Rule(
             LinkExtractor(allow = [
-                '/gezi-rehberi/\w*',
-                '/gezi-rehberi/\w*/page/\d*',
-                '/dogada-seyahat/\w*',
-                '/dogada-seyahat/\w*/page/\d*',
-                '/seyahat-ipuclari/\w*',
+                '/gezi-rehberi/$',
+                '/gezi-rehberi/page/\d*',
+                '/dogada-seyahat/$',
+                '/dogada-seyahat/page/\d*',
+                '/seyahat-ipuclari/$',
                 '/seyahat-ipuclari/page/\d*',
-                '/seyir-defteri/\w*',
+                '/seyir-defteri/$',
                 '/seyir-defteri/page/\d*'
             ], deny = [
-                '/guncel/.*',
+                '/guncel/$',
                 '/guncel/page/\d*'
             ]),
             callback='parse_item',
@@ -40,7 +40,7 @@ class DrummerlizardSpider(CrawlSpider):
     def parse_post(self, response):
         item = ViaspiderItem()
         item['url'] = response.url
-        item['source'] = 'benimlegez.com'
+        item['source'] = 'drummerlizard.com'
         item['title'] = self.get_title(response)
         item['summary'] = self.get_summary(response)
         item['categories'] = self.get_categories(response)
