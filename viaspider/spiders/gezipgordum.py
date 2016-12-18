@@ -20,20 +20,30 @@ class GezipGordumSpider(CrawlSpider):
         'http://gezipgordum.com/galeri',
         'http://gezipgordum.com/otel',
         'http://gezipgordum.com/harita'
-        ]
+    ]
 
     rules = [
         Rule(
             LinkExtractor(allow = [
+                '/kuzey-amerika/$',
                 '/kuzey-amerika/page/\d*',
+                '/guney-amerika/$',
                 '/guney-amerika/page/\d*',
+                '/avrupa/$',
                 '/avrupa/page/\d*',
+                '/kafkasya/$',
                 '/kafkasya/page/\d*',
+                '/ortadogu/$',
                 '/ortadogu/page/\d*',
+                '/asya/$',
                 '/asya/page/\d*',
+                '/seyahat-rehberi/$',
                 '/seyahat-rehberi/page/\d*',
+                '/galeri/$',
                 '/galeri/page/\d*',
+                '/otel/$',
                 '/otel/page/\d*',
+                '/harita/$',
                 '/harita/page/\d*'
             ]),
             callback='parse_item',
