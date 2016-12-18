@@ -15,7 +15,7 @@ class DrummerlizardSpider(CrawlSpider):
         Rule(
             LinkExtractor(allow = [
                 '/gezi-rehberi/\w*',
-                '/gezi-rehberi/page/\d*',
+                '/gezi-rehberi/\w*/page/\d*',
                 '/dogada-seyahat/\w*',
                 '/dogada-seyahat/\w*/page/\d*',
                 '/seyahat-ipuclari/\w*',
